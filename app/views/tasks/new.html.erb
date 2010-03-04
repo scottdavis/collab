@@ -12,10 +12,7 @@
     <%= f.text_area :description %>
   </p>
   <p>
-    <%= f.label :parent %><br />
-    <%= f.text_field :parent %>
-  </p>
-  <p>
+	  <%= f.hidden_field :parent %>
     <%= f.submit 'Create' %>
   </p>
 <% end %>

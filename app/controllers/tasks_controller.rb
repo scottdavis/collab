@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
   def index
-    @tasks = Task.all
+    @tasks = Task.parents.paginate(:per_page => 30, :page => params[:page], :include => :project)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,11 +26,11 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.xml
   def show
-    @task = Task.find(params[:id])
-
+    @task = Task.find(params[:id], :include => :tasks)
+    @tasks = @task.tasks
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @task }
+      format.xml  { render :xml => @task, :include => :tasks }
     end
   end
 
@@ -38,7 +38,7 @@ class TasksController < ApplicationController
   # GET /tasks/new.xml
   def new
     @task = Task.new
-
+    @task.parent = params[:parent].nil? ? nil : params[:parent]
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @task }

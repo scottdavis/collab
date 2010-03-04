@@ -18,6 +18,8 @@
   <%=h @task.parent %>
 </p>
 
+<%= render :partial => 'task_list' %>
+
 
 <%= link_to 'Edit', edit_project_task_path(@project, @task) %> |
 <%= link_to 'Back', project_tasks_path(@project) %>
