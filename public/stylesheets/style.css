@@ -1,0 +1,11 @@
+#flash_error {
+  color:red;
+}
+
+#flash_notice {
+  color:blue;
+}
+
+#flash_success {
+  color:green;
+}
