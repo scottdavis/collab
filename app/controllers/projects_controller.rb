@@ -1,8 +1,9 @@
 class ProjectsController < ApplicationController
+  before_filter :authenticate
   # GET /projects
   # GET /projects.xml
   def index
-    @projects = Project.all
+    @projects = Project.active.paginate :per_page => 30, :page => params[:page]
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,8 +14,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id])
-
+    @project = Project.find(params[:id], :include => [:users])
+    @tasks = @project.tasks.parents.paginate(:per_page => 30, :page => params[:page], :include => :tasks)
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }

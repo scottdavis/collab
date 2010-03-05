@@ -2,16 +2,29 @@
   margin:0;
   padding:0;
 }
-#flash_error {
+
+div.flash {
+  width:1000px;
+  margin-left:auto;
+  margin-right:auto;
+  padding:5px;
+  background-color:white;
+  margin-top:20px;
+}
+
+div#flash_error {
   color:red;
+  border:red 5px solid;
 }
 
-#flash_notice {
+div#flash_notice {
   color:blue;
+  border:blue 5px solid;
 }
 
-#flash_success {
+div#flash_success {
   color:green;
+  border:green 5px solid;
 }
 
 
@@ -21,4 +34,24 @@ table.task_list tr.odd{
 
 table.task_list tr.even{
   
+}
+
+body {
+  background-color:gray;
+}
+
+div#header {
+  width:1000px;
+  margin-left:auto;
+  margin-right:auto;
+  font-size:24;
+  font-weight:bold;
+}
+
+div#wrapper {
+  margin-left:auto;
+  margin-right:auto;
+  width:1000px;
+  margin-top:30px;
+  background-color:white;
 }

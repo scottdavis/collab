@@ -7,4 +7,5 @@ module ApplicationHelper
     out << tag(:meta, :name => 'csrf-param', :content => 'authenticity_token')
   end
   
+  
 end

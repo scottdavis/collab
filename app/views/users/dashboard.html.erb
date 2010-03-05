@@ -1,0 +1,18 @@
+<%= javascript_include_tag 'jeditable.min'%>
+<script type='text/javascript'>
+	$(document).ready(function() {
+	    $('#phone').editable('<%= user_inline_edit_path('phone') %>', {col:'phone'});
+		  $('#mobile').editable('<%= user_inline_edit_path('mobile') %>', {col:'phone'});
+	    $('#im').editable('<%= user_inline_edit_path('im') %>', {col:'phone'});
+	 });
+</script>
+<h1>Dashboard</h1>
+<%= image_tag @user.gravatar %>
+<div id='dashboard_user_info'>
+	<% [:phone, :mobile, :im].each do |col| %>
+		<p><%= col.to_s %>: <span id='<%= col.to_s %>'><%=h @user.send(col) %></span></p>
+	<% end %>
+</div>
+<% @projects.each do |project| %>
+	<p><%= link_to project.name, project %></p>
+<% end %>
