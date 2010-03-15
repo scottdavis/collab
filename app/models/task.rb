@@ -7,7 +7,7 @@ class Task < ActiveRecord::Base
   named_scope :parents, :conditions => {:parent => nil}
   #validations
   validates_presence_of :name, :description, :project_id
-  validates_associated :project
+
   validate :assignee_validation, :owner_validation
   
   def assignee_validation

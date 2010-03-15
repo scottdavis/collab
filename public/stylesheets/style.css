@@ -4,7 +4,11 @@
 }
 
 h1 {
-  margin-top:10px
+  margin:10px
+}
+
+h2 {
+  margin:5px;
 }
 
 div.flash {
@@ -21,6 +25,11 @@ div#flash_error {
   border:red 5px solid;
 }
 
+div#flash_failure{
+  color:red;
+  border:red 5px solid;
+}
+
 div#flash_notice {
   color:blue;
   border:blue 5px solid;
@@ -31,6 +40,9 @@ div#flash_success {
   border:green 5px solid;
 }
 
+div#content {
+  padding:10px;
+}
 
 table.task_list tr.odd{
   background-color:#ddd;
@@ -58,4 +70,48 @@ div#wrapper {
   width:1000px;
   margin-top:30px;
   background-color:white;
+}
+
+/** Projects **/
+
+div#project_right {
+  width:30%;
+  float:right;
+}
+
+div#project_tasks {
+  float:left;
+  width:60%;
+  text-align:center;
+}
+
+div.project_user_info a{
+  font-size:20px;
+}
+
+div#post_list {
+  border:1px solid #ccc;
+  margin-top:10px;
+}
+
+div.post {
+  padding:5px;
+}
+
+table.task_list tr {
+  text-align:left;
+}
+
+table.task_list tr td {
+  padding:5px;
+}
+
+table.task_list tr th {
+  padding:10px;
+}
+
+/** Tasks **/
+
+div#task_description {
+  
 }

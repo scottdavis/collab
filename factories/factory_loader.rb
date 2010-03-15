@@ -1,7 +1,5 @@
-path = File.join(RAILS_ROOT, 'factories')
 require 'factory_girl'
-["user", "task", "project"].each {|factory| require File.join(path, "#{factory}_factory")}
-
+require 'factories/factories'
 class FactoryLoader 
   
   def self.up
@@ -30,6 +28,7 @@ class FactoryLoader
       10.times do |i|
         p = Factory.create(:project, :owner => user, :users => [user])
         self.create_tasks(p, user)
+        self.create_wall_posts(p)
       end
     end
   end
@@ -43,6 +42,12 @@ class FactoryLoader
           Factory.create(:task, :project => project, :parent => t.id, :owner => user, :assignee => user)
         end
       end
+    end
+  end
+  
+  def self.create_wall_posts(project)
+    User.all.each do |user|
+      Factory.create(:wall, :author => user, :project => project)
     end
   end
   

@@ -1,21 +1,23 @@
 <% unless @tasks.empty? %>
-	<table class='task_list'>
+	<table class='task_list' cellspacing='0' cellpadding='0'>
 	  <tr>
 	    <th>Name</th>
 	    <th>Project</th>
 	    <th>Description</th>
 	    <th>Children</th>
+			<th>&nbsp;</th>
 	  </tr>
 
 	<% @tasks.each do |task| %>
 	  <tr class="<%= cycle(:even, :odd)%>">
-	    <td><%=h task.name %></td>
+	    <td><%= link_to h(task.name), project_task_path(@project, task) %></td>
 	    <td><%= link_to h(task.project.name), project_path(task.project) %></td>
-	    <td><%=h task.description %></td>
-	    <td><%=h task.tasks.size %></td>
-	    <td><%= link_to 'Show', project_task_path(@project, task) %></td>
-	    <td><%= link_to 'Edit', edit_project_task_path(@project, task) %></td>
-	    <td><%= link_to 'Destroy', project_task_path(@project, task), :confirm => 'Are you sure?', :method => :delete %></td>
+	    <td><%=h truncate(task.description, :length => 158) %></td>
+	    <td><%= link_to h(task.tasks.size), project_task_path(@project, task) %></td>
+	    <td>
+				<%= link_to 'Edit', edit_project_task_path(@project, task) %>
+				<%= link_to 'Destroy', project_task_path(@project, task), :confirm => 'Are you sure?', :method => :delete %>
+			</td>
 	  </tr>
 	<% end %>
 	</table>

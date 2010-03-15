@@ -1,5 +1,6 @@
 class Project < ActiveRecord::Base
   has_many :tasks
+  has_many :wall_posts, :class_name => "Wall", :foreign_key => "project_id", :order => "created_at DESC"
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"
   validates_presence_of :name
   has_and_belongs_to_many :users

@@ -10,12 +10,35 @@ class ProjectsController < ApplicationController
       format.xml  { render :xml => @projects }
     end
   end
+  
+  def join
+    @project = Project.find(params[:project_id])
+    @project.users << current_user
+    if @project.save
+      flash[:success] = "You have joined #{@project.name}"
+    else
+      flash[:error] = "There was a problem joining this project"
+    end
+    redirect_to project_path(@project)
+  end
+
+  def leave
+    @project = Project.find(params[:project_id])
+    @project.users.delete current_user
+    if @project.save
+      flash[:success] = "You have been removed from #{@project.name}"
+    else
+      flash[:error] = "There was an error removing you form this project"
+    end
+    redirect_to project_path(@project)
+  end
 
   # GET /projects/1
   # GET /projects/1.xml
   def show
-    @project = Project.find(params[:id], :include => [:users])
+    @project = Project.find(params[:id], :include => [:users, :wall_posts])
     @tasks = @project.tasks.parents.paginate(:per_page => 30, :page => params[:page], :include => :tasks)
+    @wall_posts = @project.wall_posts.paginate(:per_page => 15, :page => params[:post_page])
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @project }

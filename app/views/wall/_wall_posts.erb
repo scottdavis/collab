@@ -1,0 +1,4 @@
+<div class='post'>
+	<%= image_tag post.author.gravatar(16), :alt => post.author.short_name %>
+	<%= parse_wall_string(post.text) %>
+</div>

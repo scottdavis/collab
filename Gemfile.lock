@@ -1,0 +1,76 @@
+--- 
+dependencies: 
+  faker: 
+    group: 
+    - :test
+    - :developemtn
+    version: ">= 0"
+  mongrel: 
+    group: 
+    - :development
+    version: ">= 0"
+  mysql: 
+    group: 
+    - :default
+    version: ">= 0"
+  shoulda: 
+    group: 
+    - :test
+    version: ">= 0"
+  formtastic: 
+    group: 
+    - :default
+    version: ">= 0"
+  factory_girl: 
+    group: 
+    - :test
+    version: ">= 0"
+  paperclip: 
+    group: 
+    - :default
+    version: ">= 0"
+  will_paginate: 
+    group: 
+    - :default
+    version: ">= 0"
+  clearance: 
+    group: 
+    - :default
+    version: ">= 0"
+specs: 
+- faker: 
+    version: 0.3.1
+- fastthread: 
+    version: 1.0.7
+- mongrel: 
+    version: 1.1.5
+- mysql: 
+    version: 2.8.1
+- shoulda: 
+    version: 2.10.3
+- rack: 
+    version: 1.0.1
+- gem_plugin: 
+    version: 0.2.3
+- cgi_multipart_eof_fix: 
+    version: 2.5.0
+- formtastic: 
+    version: 0.9.7
+- will_paginate: 
+    version: 2.3.12
+- paperclip: 
+    version: 2.3.1.1
+- factory_girl: 
+    version: 1.2.3
+- daemons: 
+    version: 1.0.10
+- clearance: 
+    version: 0.8.8
+- actionpack: 
+    version: 2.3.5
+- activesupport: 
+    version: 2.3.5
+hash: bc067d01abbb21b054cfc123f404a7874dfc8f94
+sources: 
+- Rubygems: 
+    uri: http://gemcutter.org

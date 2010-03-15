@@ -1,15 +1,40 @@
-<p>
-  <b>Name:</b>
-  <%=h @project.name %>
-</p>
-<div id='project_users'>
-	<% @project.users.each do |user| %>
-		<%= image_tag user.gravatar %> <%= link_to "@#{user.short_name}", user_path(user.short_name) %>
-	<% end %>
+<h1><%=h @project.name.titleize %></h1>
+<p><%= link_to 'Edit', edit_project_path(@project) %></p>
+<div id='project_right'>
+	<div id='project_users'>
+		<h2>Users</h2>
+		<% @project.users.each do |user| %>
+			<div class='project_user_info'>
+				<%= image_tag user.gravatar %> <%= link_to "@#{user.short_name}", user_path(user.short_name) %>
+			</div>
+		<% end %>
+		<% unless @project.users.include?(current_user) %>
+			<%= link_to "Join Project", join_project_path(@project), :method => :post %>
+		<% else %>
+			<%= link_to "Leave Project", leave_project_path(@project), :method => :delete %>
+		<% end %>
+	</div>
+	<h2>Wall</h2>
+	<div id='project_wall'>
+		<div id='add_post'>
+			<% remote_form_for :wall, :url => project_wall_index_path(@project) do |f| %>
+				<%= f.text_area :text, :cols => 35, :rows => 10, :id=> :new_post %>
+				<%= f.submit :Submit %>
+			<% end %>
+		</div>
+		<div id='post_list'>
+		<% @wall_posts.each do |post| %>
+			<%= render :partial => 'wall/wall_posts', :locals => {:post => post} %>
+		<% end %>
+		<%= will_paginate @wall_posts, :param_name => :post_page %>
+		</div>
+	</div>
 </div>
+
 <div id='project_tasks'>
+	<h2>Tasks</h2>
 	<%= render :partial => 'tasks/task_list' %>
+	<%= will_paginate @tasks %>
 </div>
-<%= will_paginate @tasks %>
-<%= link_to 'Edit', edit_project_path(@project) %> |
+<br style='clear:both'/>
 <%= link_to 'Back', projects_path %>

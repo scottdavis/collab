@@ -11,4 +11,6 @@ class ApplicationController < ActionController::Base
   def set_page
     @page_title = "Collab"
   end
+  
+  
 end

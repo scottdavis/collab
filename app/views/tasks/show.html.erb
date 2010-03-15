@@ -1,14 +1,11 @@
-<p>
-  <b>Name:</b>
-  <%=h @task.name %>
-</p>
+<h1><%=h @task.name %></h1>
 
 <p>
   <b>Project:</b>
   <%=h @task.project.name %>
 </p>
 
-<p>
+<p id='task_description'>
   <b>Description:</b>
   <%=h @task.description %>
 </p>

@@ -1,0 +1,7 @@
+if @wall.save
+  page.insert_html :prepend, :post_list, :partial => 'wall_posts', :locals => {:post => @wall }
+  page[:post_list].visual_effect :highlight
+  page[:new_post].val('')
+else
+  page.alert("Wall post is invalid")
+end
