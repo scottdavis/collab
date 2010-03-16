@@ -26,6 +26,7 @@ Rails::Initializer.run do |config|
   config.gem 'formtastic'
   config.gem 'faker'
   config.gem 'mysql'
+  config.gem 'paperclip'
   config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => "http://gemcutter.org"
   config.gem 'rack-validate'
   # Only load the plugins named here, in the order given (default is alphabetical).
