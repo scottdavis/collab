@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.leave_project '/projects/:project_id/leave', :controller => :projects, :action => :leave, :conditions => {:method => :delete}
   #map.dashboard '/dashboard', :controller => :users, :action => :dashboard
 
+  map.update_tags '/tag/:type/:id', :controller => :tag, :action => :tag, :conditions => {:method => :post }
   
   map.resources :projects do |projects|
     projects.resources :tasks

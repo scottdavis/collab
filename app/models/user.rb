@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  acts_as_ferret :fields => %w(short_name email), :store_class_name => true
   include Clearance::User
   has_and_belongs_to_many :projects
   has_many :owned_projects, :class_name => "Project", :foreign_key => "owner_id"

@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.xml
   def index
-    @tasks = Task.parents.paginate(:per_page => 30, :page => params[:page], :include => :project)
+    @tasks = @project.tasks.parents.paginate(:per_page => 30, :page => params[:page], :include => :project)
 
     respond_to do |format|
       format.html # index.html.erb

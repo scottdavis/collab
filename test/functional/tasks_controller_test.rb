@@ -1,45 +1,24 @@
-require 'test_helper'
+require File.join(File.dirname(__FILE__), '..', 'test_helper')
 
 class TasksControllerTest < ActionController::TestCase
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:tasks)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create task" do
-    assert_difference('Task.count') do
-      post :create, :task => { }
+  
+  context "User is logged in" do
+    setup do
+      @user = Factory(:user)
+      sign_in_as(@user)
+      @project = Factory(:project)
+      5.times do
+        Factory(:task, :project => @project)
+      end
     end
-
-    assert_redirected_to task_path(assigns(:task))
-  end
-
-  test "should show task" do
-    get :show, :id => tasks(:one).to_param
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, :id => tasks(:one).to_param
-    assert_response :success
-  end
-
-  test "should update task" do
-    put :update, :id => tasks(:one).to_param, :task => { }
-    assert_redirected_to task_path(assigns(:task))
-  end
-
-  test "should destroy task" do
-    assert_difference('Task.count', -1) do
-      delete :destroy, :id => tasks(:one).to_param
+    
+    should "get index" do
+      get :index, :project_id => @project
+      assert assigns(:tasks)
+      assert_equal 5, assigns(:tasks).size
+      assert_response :success
     end
-
-    assert_redirected_to tasks_path
+    
   end
+  
 end

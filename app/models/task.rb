@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  acts_as_taggable
+  acts_as_ferret :fields => %w(name description), :store_class_name => true
   belongs_to :project
   has_many :tasks, :foreign_key => :parent
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"

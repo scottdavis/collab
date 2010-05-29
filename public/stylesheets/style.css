@@ -110,6 +110,10 @@ table.task_list tr th {
   padding:10px;
 }
 
+div.watch_action {
+  float:right;
+}
+
 /** Tasks **/
 
 div#task_description {

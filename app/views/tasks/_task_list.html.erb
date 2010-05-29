@@ -1,26 +1,27 @@
+<script type="text/javascript">
+	$(function() {
+		$("#accordion").accordion({active:false});
+	});
+	</script>
 <% unless @tasks.empty? %>
-	<table class='task_list' cellspacing='0' cellpadding='0'>
-	  <tr>
-	    <th>Name</th>
-	    <th>Project</th>
-	    <th>Description</th>
-	    <th>Children</th>
-			<th>&nbsp;</th>
-	  </tr>
-
+<div id="accordion">
 	<% @tasks.each do |task| %>
-	  <tr class="<%= cycle(:even, :odd)%>">
-	    <td><%= link_to h(task.name), project_task_path(@project, task) %></td>
-	    <td><%= link_to h(task.project.name), project_path(task.project) %></td>
-	    <td><%=h truncate(task.description, :length => 158) %></td>
-	    <td><%= link_to h(task.tasks.size), project_task_path(@project, task) %></td>
-	    <td>
+		<h3><a href="#"><%=h task.name %></a></h3>
+		<div>
+			<div class='task_description'>	
+				<h4>Description:</h4>
+				<%=h task.description %>
+			</div>	
+			<div class='task_children'>
+				<h4>Children</h4>
+				<%= link_to task.tasks.size, project_task_path(@project, task) %>
+			</div>
+			<div class='task_edit_action'>
+				<%= link_to 'View', project_task_path(@project, task) %>
 				<%= link_to 'Edit', edit_project_task_path(@project, task) %>
 				<%= link_to 'Destroy', project_task_path(@project, task), :confirm => 'Are you sure?', :method => :delete %>
-			</td>
-	  </tr>
+			</div>
+		</div>
 	<% end %>
-	</table>
-<% else %>
- <p> No Dependet Tasks </p>
+</div>
 <% end %>

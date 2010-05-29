@@ -7,5 +7,28 @@ module ApplicationHelper
     out << tag(:meta, :name => 'csrf-param', :content => 'authenticity_token')
   end
   
+  def display_tags(tags)
+    return if tags.blank?
+    tags.map(&:to_s).join(", ")
+  end
+  
+  
+  def tags(object)
+    path = update_tags_path(object.class.name.downcase, object)
+    tags = display_tags(object.tags)
+    out = []
+    out << javascript_include_tag('jeditable.min')
+    out << "
+    <script type='text/javascript'>
+    	$(document).ready(function() {
+    	    $('#tags').editable('#{path}', {col:'project'});
+    	 });
+    </script>
+    <span id='tags'>
+    	#{tags}
+    </span>
+    "
+    out.join("\n")
+  end
   
 end

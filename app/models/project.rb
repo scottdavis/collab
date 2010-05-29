@@ -1,4 +1,6 @@
 class Project < ActiveRecord::Base
+  acts_as_taggable
+  acts_as_ferret :fields => %w(name), :store_class_name => true
   has_many :tasks
   has_many :wall_posts, :class_name => "Wall", :foreign_key => "project_id", :order => "created_at DESC"
   belongs_to :owner, :class_name => "User", :foreign_key => "owner_id"

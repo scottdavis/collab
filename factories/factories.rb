@@ -13,7 +13,7 @@ end
 
 Factory.define :task do |f|
   f.sequence(:name) {|n| "task #{n}"}
-  f.description Faker::Lorem.words(50)
+  f.sequence(:description) {|n| "This is a task #{n}"}
 end
 
 Factory.define :wall do |f|
