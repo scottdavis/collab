@@ -39,21 +39,12 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id], :include => [:users, :wall_posts])
     @tasks = @project.tasks.parents.paginate(:per_page => 30, :page => params[:page], :include => :tasks)
     @wall_posts = @project.wall_posts.paginate(:per_page => 15, :page => params[:post_page])
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @project }
-    end
   end
 
   # GET /projects/new
   # GET /projects/new.xml
   def new
     @project = Project.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @project }
-    end
   end
 
   # GET /projects/1/edit
@@ -66,16 +57,13 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
 
-    respond_to do |format|
-      if @project.save
-        flash[:notice] = 'Project was successfully created.'
-        format.html { redirect_to(@project) }
-        format.xml  { render :xml => @project, :status => :created, :location => @project }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @project.errors, :status => :unprocessable_entity }
-      end
+    if @project.save
+      flash[:notice] = 'Project was successfully created.'
+      format.html { redirect_to(@project) }
+    else
+      format.html { render :action => "new" }
     end
+
   end
 
   # PUT /projects/1

@@ -16,11 +16,6 @@ class TasksController < ApplicationController
   # GET /tasks.xml
   def index
     @tasks = @project.tasks.parents.paginate(:per_page => 30, :page => params[:page], :include => :project)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @tasks }
-    end
   end
 
   # GET /tasks/1
@@ -28,10 +23,6 @@ class TasksController < ApplicationController
   def show
     @task = Task.find(params[:id], :include => :tasks)
     @tasks = @task.tasks
-    respond_to do |format|
-      format.html # show.html.erb
-      format.xml  { render :xml => @task, :include => :tasks }
-    end
   end
 
   # GET /tasks/new
@@ -39,10 +30,6 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @task.parent = params[:parent].nil? ? nil : params[:parent]
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @task }
-    end
   end
 
   # GET /tasks/1/edit
@@ -56,15 +43,11 @@ class TasksController < ApplicationController
     params[:task][:project] = @project.id
     @task = Task.new(params[:task])
 
-    respond_to do |format|
-      if @task.save
-        flash[:success] = 'Task was successfully created.'
-        format.html { redirect_to project_task_path(@project, @task) }
-        format.xml  { render :xml => @task, :status => :created, :location => @task }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
-      end
+    if @task.save
+      flash[:success] = 'Task was successfully created.'
+      redirect_to project_task_path(@project, @task)
+    else
+      render :action => "new"
     end
   end
 
@@ -73,16 +56,11 @@ class TasksController < ApplicationController
   def update
     params[:task][:project] = @project
     @task = Task.find(params[:id])
-
-    respond_to do |format|
-      if @task.update_attributes(params[:task])
-        flash[:success] = 'Task was successfully updated.'
-        format.html { redirect_to project_task_path(@project, @task) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @task.errors, :status => :unprocessable_entity }
-      end
+    if @task.update_attributes(params[:task])
+      flash[:success] = 'Task was successfully updated.'
+      redirect_to project_task_path(@project, @task) }
+    else
+      render :action => "edit" }
     end
   end
 

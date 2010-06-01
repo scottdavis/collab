@@ -1,0 +1,38 @@
+%h1
+  = @project.name.titleize
+= tags(@project)
+
+.watch_action
+  -unless @project.users.include?(current_user)
+    = link_to "Watch Project", join_project_path(@project), :method => :post
+  -else
+    = link_to "Ignore Project", leave_project_path(@project), :method => :delete
+    
+%br{:style => "clear:both"}
+%p
+  = link_to 'Edit', edit_project_path(@project)
+#project_right
+  #project_users
+    %h2
+      Users
+    -@project.users.each do |user|
+      .project_user_info
+        = image_tag user.gravatar
+        = link_to "@#{user.short_name}", user_path(user.short_name)
+  #project_wall
+    #add_post
+      - remote_form_for :wall, :url => project_wall_index_path(@project) do |f|
+        = f.text_area :text, :cols => 35, :rows => 10, :id=> :new_post
+        = f.submit :Submit
+  #post_list
+    - @wall_posts.each do |post|
+      = render :partial => 'wall/wall_posts', :locals => {:post => post}
+    = will_paginate @wall_posts, :param_name => :post_page
+#project_tasks
+  %h2
+    Tasks
+  = render :partial => 'tasks/task_list'
+  = will_paginate @tasks
+
+%br{:style => "clear:both"}
+= link_to 'Back', projects_path
