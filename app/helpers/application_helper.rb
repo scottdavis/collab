@@ -12,6 +12,14 @@ module ApplicationHelper
     tags.map(&:to_s).join(", ")
   end
   
+  def flashes
+    out = ''
+    flash.each_pair do |key, value|
+      out << content_tag(:div, value, {:id => "flash_#{key}", :class => key})
+    end
+    content_tag(:div, out, {:id => "flashes"})
+  end
+  
   
   def tags(object)
     path = update_tags_path(object.class.name.downcase, object)

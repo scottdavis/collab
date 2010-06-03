@@ -4,11 +4,6 @@ class ProjectsController < ApplicationController
   # GET /projects.xml
   def index
     @projects = Project.active.paginate :per_page => 30, :page => params[:page]
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @projects }
-    end
   end
   
   def join

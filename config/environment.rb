@@ -31,6 +31,7 @@ Rails::Initializer.run do |config|
   config.gem "matthuhiggins-foreigner", :lib => "foreigner", :source => "http://gemcutter.org"
   config.gem "acts-as-taggable-on"
   config.gem 'acts_as_ferret'
+  config.gem 'haml'
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
   # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
